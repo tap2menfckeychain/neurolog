@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>NeuroLog — Bộ Nhật ký tâm lý đồng hành cùng con lớn khôn</title>
+  <meta name="description" content="NeuroLog: sổ tay giấy không màn hình cho bé kết hợp ứng dụng AI cho cha mẹ, giúp trẻ 6–11 tuổi có biểu hiện ADHD được thấu hiểu và đồng hành đúng cách.">
+  <meta property="og:title" content="NeuroLog — Bộ Nhật ký tâm lý đồng hành cùng con lớn khôn">
+  <meta property="og:description" content="Chiếc cầu nối Phygital gắn kết yêu thương: từ quan sát hằng ngày tại nhà đến dữ liệu hữu ích cho gia đình và bác sĩ.">
+  <meta name="theme-color" content="#eef6ff">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="khoa">
+
+  <!-- Màn bìa sổ: chạm để mở (mở là nhạc phát) -->
+  <div id="bia" class="bia" role="button" tabindex="0" aria-label="Mở sổ NeuroLog">
+    <img class="bia-hoa h1" src="anh/hoa-hong.webp" alt="">
+    <img class="bia-hoa h2" src="anh/hoa-la.webp" alt="">
+    <img class="bia-hoa h3" src="anh/sao-xanh.webp" alt="">
+    <div class="so-tay">
+      <div class="so-ruot">
+        <span class="so-ruot-chu">Nhật ký hôm nay</span>
+        <span class="so-dong"></span><span class="so-dong"></span><span class="so-dong"></span><span class="so-dong"></span>
+      </div>
+      <div class="so-bia">
+        <span class="so-gay"></span>
+        <span class="so-chun"></span>
+        <img class="so-logo" src="anh/logo.png" alt="NeuroLog">
+        <p class="so-dong1" id="biaDong1"></p>
+        <p class="so-dong2" id="biaDong2"></p>
+        <img class="so-mat" src="anh/mat-cuoi.webp" alt="">
+        <span class="so-sticker s1">★</span>
+        <span class="so-sticker s2">♥</span>
+      </div>
+    </div>
+    <p class="bia-goi-y"><span class="cham"></span><span id="biaGoiY"></span><span class="not">♪</span></p>
+  </div>
+
+  <canvas id="nen" class="nen-hat" aria-hidden="true"></canvas>
+  <div class="nen-hoa" aria-hidden="true">
+    <img class="nh a" src="anh/hoa-cam.webp" alt="">
+    <img class="nh b" src="anh/sao-xanh.webp" alt="">
+    <img class="nh c" src="anh/hoa-la.webp" alt="">
+    <img class="nh d" src="anh/hoa-hong.webp" alt="">
+    <img class="nh e" src="anh/hoa-vang.webp" alt="">
+  </div>
+
+  <header class="dau" id="dau">
+    <a class="dau-logo" href="#trangChu" aria-label="NeuroLog — về đầu trang"><img src="anh/logo.png" alt="NeuroLog"></a>
+    <nav class="dau-menu" id="menu" aria-label="Mục lục">
+      <a href="#vanDe">Vấn đề</a>
+      <a href="#giaiPhap">Giải pháp</a>
+      <a href="#vongLap">Cách hoạt động</a>
+      <a href="#sanPham">Sản phẩm</a>
+      <a href="#doiNgu">Đội ngũ</a>
+      <a href="#lienHe">Liên hệ</a>
+    </nav>
+    <button class="nut-nhac" id="nutNhac" type="button" aria-label="Bật/tắt nhạc nền">
+      <img src="anh/mat-cuoi.webp" alt="">
+      <span class="song"><i></i><i></i><i></i></span>
+    </button>
+    <button class="nut-menu" id="nutMenu" type="button" aria-label="Mở mục lục" aria-expanded="false"><i></i><i></i><i></i></button>
+  </header>
+
+  <main>
+    <!-- Đầu trang -->
+    <section class="hero" id="trangChu">
+      <div class="khung hero-luoi">
+        <div class="hero-chu">
+          <p class="nhan-hong hien" id="heroNhan"></p>
+          <h1 class="hero-td hien" id="heroTieuDe"></h1>
+          <p class="hero-mota hien" id="heroMoTa"></p>
+          <div class="hero-nut hien">
+            <a class="nut nut-chinh" id="heroNut1" target="_blank" rel="noopener"></a>
+            <a class="nut nut-phu" id="heroNut2" href="#vanDe"></a>
+          </div>
+          <p class="khau-hieu hien" id="heroKhauHieu"></p>
+        </div>
+        <div class="hero-anh hien">
+          <figure class="hinh-so s1"><img src="anh/so-tay-1.jpg" alt="Trang sổ Nhật ký hôm nay"><span class="bang-dinh"></span></figure>
+          <figure class="hinh-so s2"><img src="anh/so-tay-2.jpg" alt="Trang sổ Cảm xúc và nhiệm vụ của bé"><span class="bang-dinh"></span></figure>
+          <figure class="hinh-app">
+            <span class="trinh-duyet"><i></i><i></i><i></i></span>
+            <img src="anh/ung-dung.jpg" alt="Ứng dụng NeuroLog">
+          </figure>
+          <span class="the-noi giay"><b>PAPER</b><span id="heroGiay"></span></span>
+          <span class="the-noi so"><b>DIGITAL</b><span id="heroSo"></span></span>
+          <img class="hero-mat" src="anh/mat-cuoi.webp" alt="">
+        </div>
+      </div>
+      <div class="khung">
+        <div class="con-so" id="conSo"></div>
+      </div>
+    </section>
+
+    <section class="phan" id="vanDe">
+      <div class="khung">
+        <div class="phan-dau" data-so="01" id="vdDau"></div>
+        <div class="luoi-4" id="vdThe"></div>
+      </div>
+    </section>
+
+    <section class="phan phan-nhat" id="khachHang">
+      <div class="khung">
+        <div class="phan-dau" data-so="02" id="khDau"></div>
+        <div class="luoi-3" id="khNhom"></div>
+      </div>
+    </section>
+
+    <section class="phan" id="giaiPhap">
+      <div class="khung">
+        <div class="phan-dau" data-so="03" id="gpDau"></div>
+        <div class="gp-doi" id="gpDoi"></div>
+        <div class="gp-diem" id="gpDiem"></div>
+      </div>
+    </section>
+
+    <section class="phan phan-xanh" id="vongLap">
+      <div class="khung">
+        <div class="phan-dau sang" data-so="04" id="vlDau"></div>
+        <ol class="vong" id="vlBuoc"></ol>
+      </div>
+    </section>
+
+    <section class="phan" id="cuonSo">
+      <div class="khung cs-luoi">
+        <div class="cs-anh hien">
+          <figure class="hinh-so to"><img src="anh/so-tay-2.jpg" alt="Trang sổ của bé"><span class="bang-dinh"></span></figure>
+          <img class="cs-be" src="anh/be-viet-so.webp" alt="">
+        </div>
+        <div>
+          <div class="phan-dau trai" data-so="05" id="csDau"></div>
+          <div class="cs-tinh-nang" id="csTinhNang"></div>
+          <div class="cs-dac-diem" id="csDacDiem"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="phan phan-nhat" id="soSanh">
+      <div class="khung">
+        <div class="phan-dau" data-so="06" id="ssDau"></div>
+        <div class="bang-cuon hien"><table class="bang" id="ssBang"></table></div>
+        <p class="goi-y-cuon">← Vuốt ngang để xem đủ bảng →</p>
+      </div>
+    </section>
+
+    <section class="phan" id="sanPham">
+      <div class="khung">
+        <div class="phan-dau" data-so="07" id="spDau"></div>
+        <div class="gia" id="spGoi"></div>
+        <div class="sp-duoi">
+          <div class="so-treo hien" id="spSoTreo"></div>
+          <div class="phan-khuc hien" id="spPhanKhuc"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="phan phan-nhat" id="tacDong">
+      <div class="khung">
+        <div class="phan-dau" data-so="08" id="tdDau"></div>
+        <div class="luoi-4 sdg" id="tdSdg"></div>
+      </div>
+    </section>
+
+    <section class="phan" id="loTrinh">
+      <div class="khung">
+        <div class="phan-dau" data-so="09" id="ltDau"></div>
+        <div class="lt-thang" id="ltThang"></div>
+        <div class="lt-duoi">
+          <div class="bieu-do hien" id="ltBieuDo"></div>
+          <div class="lt-diem" id="ltDiem"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="phan phan-hong" id="doiNgu">
+      <div class="khung">
+        <div class="phan-dau" data-so="10" id="dnDau"></div>
+        <div class="doi-ngu" id="dnThanhVien"></div>
+      </div>
+    </section>
+
+    <section class="phan" id="coVan">
+      <div class="khung">
+        <div class="phan-dau" data-so="11" id="cvDau"></div>
+        <div class="co-van" id="cvNguoi"></div>
+      </div>
+    </section>
+
+    <section class="phan lien-he" id="lienHe">
+      <div class="khung">
+        <div class="lh-the hien">
+          <img class="lh-hoa a" src="anh/hoa-hong.webp" alt="">
+          <img class="lh-hoa b" src="anh/hoa-la.webp" alt="">
+          <img class="lh-logo" src="anh/logo.png" alt="NeuroLog">
+          <p class="nhan-hong" id="lhNhan"></p>
+          <h2 class="lh-td" id="lhTieuDe"></h2>
+          <p class="lh-mota" id="lhMoTa"></p>
+          <div class="lh-nut" id="lhNut"></div>
+          <p class="lh-luu-y" id="lhLuuY"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="chan">
+    <img src="anh/logo.png" alt="NeuroLog">
+    <p id="chanKhauHieu"></p>
+    <p class="chan-nho" id="chanNhac"></p>
+  </footer>
+
+  <audio id="nhac" loop preload="auto"></audio>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
